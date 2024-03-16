@@ -1,7 +1,6 @@
 package com.nicokuchling.wegfest.iteration_service.services;
 
 import com.nicokuchling.wegfest.api.core.iteration.Iteration;
-import com.nicokuchling.wegfest.api.core.iteration.IterationPosition;
 import com.nicokuchling.wegfest.api.core.iteration.IterationService;
 import com.nicokuchling.wegfest.shared.http.ServiceUtil;
 import org.slf4j.Logger;
@@ -30,8 +29,10 @@ public class IterationServiceImpl implements IterationService {
     public List<Iteration> getAllIterations() {
         LOG.debug("/iteration return all available iterations");
 
-        Iteration iteration1 = new Iteration(1, 1, Arrays.asList(1,2,3));
-        Iteration iteration2 = new Iteration(2, 2, Arrays.asList(4,5,6));
+        Iteration iteration1 =
+                new Iteration(1, 1, Arrays.asList(1,2,3), serviceUtil.getServiceAddress());
+        Iteration iteration2 =
+                new Iteration(2, 2, Arrays.asList(4,5,6), serviceUtil.getServiceAddress());
 
         List<Iteration> iterations = new ArrayList<>();
         iterations.add(iteration1);
@@ -51,13 +52,13 @@ public class IterationServiceImpl implements IterationService {
     public Iteration peakNextIteration() {
         LOG.debug("/iteration/next/peak return next iteration in queue but don't remove it");
 
-        return new Iteration(1, 1, Arrays.asList(1,2,3));
+        return new Iteration(1, 1, Arrays.asList(1,2,3), serviceUtil.getServiceAddress());
     }
 
     @Override
     public Iteration popNextIteration() {
         LOG.debug("/iteration/next/pop return next iteration in queue and remove it");
 
-        return new Iteration(1, 1, Arrays.asList(1,2,3));
+        return new Iteration(1, 1, Arrays.asList(1,2,3), serviceUtil.getServiceAddress());
     }
 }
